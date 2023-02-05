@@ -1,0 +1,443 @@
+
+Introduction a Git
+------------------
+
+1- ce qu'il faut savoir c'est : A chaque branche est associer un ou plusieurs Commit
+
+2- Quatre repectoire sont mis en jeux (Dans un Ordre bien précis) 
+  
+    .repectoire de travail(Working Directory)
+	
+	.Zone d'index(Staging Area)										
+	
+	.Dépot local(Git Directory << repository >>)
+	
+	.Dépot Distant(Remote Repository)
+
+
+NB: les trois premières Zones(Repectoires) sont des zones Local et sont independante de la Dernière Zone a savoir Dépot Distant(Remote repository hebergé sur un server)
+---
+
+--------------------------------------------------[Quelque commande Basique a connaitre]------------------------------------------------------------------------------------------------------------------------------------------
+
+
+>> ls -la    => pour afficher les fichier et les dossier qui commence par un point(.) notamment les fichiers et dossier caché(.git par exemple)
+
+
+
+--------------------------------------------------[ Visualization des modification qui ont été apporté a un Fichier]--------------------------------------------------------------------------------------------------------------
+
+>> git diff  => permet de Visualizé <<toutes>> les Modifications présentes dans le WorkSpace(repectoire de travail)  <<Par rapport>> a la dernière Version enregistée dans le <<Depot local>> c'est a dire grâce a (Commit)
+
+
+>> git diff FileName1 FileName2  => permet de visualizé les modifications apporté a ces fichiers qui ont lieu dans WorkSpace par rapport au Dépot git local
+
+
+
+Attention : si WorkSpace ce que git add n'a pas encore été appliquer
+----------
+
+Cependans si nous ajoutons les modificatios à la Zone d'indexage(Staging Area) En utilisant la commande git add -A,  alors dans ce cas precis la commande git diff n'affichera Aucune modification
+
+Car nos modifiction on été deplacées dans la zone d'indexage c'est a dire de (Workspace)====>vers====>(Staging Area).
+
+==> Nous pouvons également observé les modifications présentes dans la Zone D'indexage(Staging Area)  via la commande :
+
+>> git diff --cached   ==> pour voir la totalité des modifications présentent dans la zones d'indexe
+
+>> git dit --cached <File list> ==> pour voir les Modifications apporté uniquement aux fichiers listés
+
+
+
+--------------------------------------------------[Gestions des Historiques ]------------------------------------------------------------------------------------------------------------------------------------------------------
+
+L'historique d'un dépot git est constitué d'un ensemble(List) de commit relier entre eux par un pointeur (Symbolisé par des flèches).
+
+Exemple : Commit A <-- Commit B <-- Commit C <-- Commit D 
+--------
+
+Un ensemble de commit relier entre eux constitue ce qu'on appel une branche.
+
+--> Un commit est constitué de :
+
+     1- SHA - one  (Identifiant unique de 40 caractères) ce identifiant sert de Check-Sum pour verifier l'intégrité de notre commit 
+	 
+	 2- un ensemble de Modification
+	 
+	 3- Un commentaire decrivant le commit (Grâce a la commande git commit -m "Commentaire")
+	 
+	 4- les Informations sur l'auteur << Nom et Email >> (Le developpeurs)
+	 
+	 5- Une date de créations (Automatiquement gérer par git)
+	 
+	 6- Liste(SHA-1) de son ou ses parents (Cette Liste peut contenir entre 0 et N parent)
+	 
+	 
+
+La Deuxièmes Notion Fondamentales dans git sont Les TAG.
+
+--> Un TAG c'est :
+    
+	.Un Intitulé
+	
+	.Pointeur(SHA-1) c'est a dire un pointer Vers un commit
+   
+
+   
+NB: Toutes les branche dans Git possède un TAG a son Nom (C'est a dire, si la branche s'appel Main alors cette brance possède également un Tag qui s'appel Main ).
+--  
+    La Particularité de ces TAG rélier directement aux branches, c'est qu'il pointent directement su le <<dernier Commit>> de la branche Données, Et même si nous effectuons 
+	
+	d'autres commit par la suite Automatiquement le TAG se deplacera sur le dernier commit effectuer << On les Appel des TAG de Branche >>.
+	
+	IL est toute fois possible de créer nos propre TAG attacher a un commit 
+	
+	<< A la differenc des TAG de branche ces dernier ne vont pas se deplacer en même temps que les commit ils vont resté attacher au commit sur Laquel nous les avons Attacher>>.
+	
+	Git gère Automatiquement un autre pointeur qui s'appel HEAD. Ce pointeur a pour Particularité de nous indiqué le commit sur lequel nous somme Actuellement.
+	
+	Vue qu'il est possible de Naviguer dans l'Historique de Git il faut bien indiquer le commit dans lequel nous nous trouvons.
+
+
+Commande
+---------
+
+>> git log   ==> pour afficher l'Historique  de notre Dépot git << c'est a dire tout les commit (la liste des Commits) >>
+
+>> git log --graph ==> est l'une de mes commande favorite
+
+>> git log --graph --all // voir sous forme de graph les branches
+
+>> git log --oneline --decorate --graph --all ==> l'une des meilleurs commande qui puisse existé
+
+>> gitk --all  On garde le meilleur en dernier
+
+>> git log -n 2  ==> permet de reduire la liste des commit a d 2 (lister a 2 commit)
+
+
+>> git show SHA-1  ==> permet d'affichiger les modification ajouter via le commit
+
+
+>> git show master  ==> permet d'afficher les modification du dernier commit car le TAG master par defaut pointe toujours sur le Dernier commit.
+
+
+Attention : c'est commande <<git show ..>>  est équivalente a celle de << git diff >> la seul difference est que << git diff >> affiche les modification du <<Workspace>> par rapport a celui de <<git Repository>>  
+-----------
+			Alors que << git show SHA-1-ID >>  affiche les Modification au niveau du Git repository, tout est une Question de <<Niveau>> des different repectoire mentionné si Haut (WorkSpace, Staging Area, git Repository).
+			
+			Car nous pouvons remarquer qu'une fois nous nous trouvons dans la zone Staging Area grace a la commande << git add >> pour afficher l'ensemble des Modification nous passons par la commande << Git diff --cached >>
+			
+			Etant donné que nous utiliserons l'identifiant unique qui est le Show-One-ID, alors cette commande doit toujours être précedé par la commande <<git log ou git log -n 2>>.
+			
+			D'ailleurs les Modification font partie des Caracteristique d'un commit. 
+
+
+
+
+--------------------------------------------------[Gestions et creation des TAG Personnalisé]------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Tout d'abord il est important de savoir qu'il existe deux type de TAG a savoir :
+
+1-Un Custom TAG
+
+2-Un TAG de Branche
+
+Comme vous pouvez le rémarquer il est Beaucoup plus Simple d'utiliser un TAG qu'un SHA-ONE en ce qui concerne la navigation dans dans L'Historique de nos Dépot(Liste des commit effectuer).
+
+Mais Attention les TaG que nous allons créer (Custom TAG) serons Bien Different des ((TAG de Branche) comme la Branche master .
+
+En effet le TAG de Branche Master se Déplace en fonction des commit effectués, c'est a dire qu'il se positionnera toujours sur le Dernier commit, Alors que les Custom TAG vont toujours rester sur le commit auquel 
+
+Nous lavons Attacher.
+
+Il faut également Bien comprendre que l'utilité des TAG ce n'est pas Seulement de Naviguer facilement dans l'historique Mais c'est aussi pour Identifier clairement des versions bien précise.
+
+Par Exemple :    -par exemple vous faite votre Site, vous avez une version Beta, vous vouliez <<Identifier>> ce commit comme étant la version beta, Binh vous pouvez le faire justement avec Un TAG.
+-------------
+				 -Vous pouvez également utiliser les TAG pour identifier de manière Claire et Précise les different commit Associer au développement des different Module Assigné en Entreprise
+				     
+					 .Module D'Authentification = used a TAG
+
+					 .Module Gestion client  = used a TAG
+					 
+					 .Module Gestion Patient  = used a TAG
+				 
+				 Conclusion : Cela permettra d'identifier de manière claire et précise le commit en Question
+				 ------------
+
+
+Cas Pratique :  
+------------
+
+-->pour Attacher un TAG a un commit, il faut tout d'abord <<se deplacer>> sur le commit en question, Et pour cela il faut avant tout commencer a Afficher la liste de tout les Commit :
+ 
+>> git log // git log -n 4   ==> pour afficher d'abord la liste des commit
+
+>> git checkout SHA-One-ID
+
+>> git tag TAG_Name  ==> ceci remplacera l'identifiant SHA-One-ID qui est compliquer a retenir par TAG_Name
+
+
+>> git tag --delete TAG_Name  ==> pour supprimer un TAG
+
+>> git tag TAG_Name -m "Description du TAG (Intitulé)"   => creer un TAG avec un description qui est toute fois Facultatif
+
+NB : Une fois le TAG creer au lieu de vous deplacer sur un Commit en utilisant le SHA-One-ID, vous pouvez le faire en utilisant le TAG_NAme qui est <<Attacher>> au Commit
+---
+
+>> git checkout TAG_Name
+
+
+>> git tag  ==> pour afficher la liste de tout les Tag creer par vous même (le TAG Master ne fera donc pas parti car il s'agit d'un TAG de Branche Creer par Git )
+
+
+
+
+
+
+--------------------------------------------------[Gestions Des Remotes]-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Tout est une question de dépot et il en existe deux :
+
+-Dépot local   
+
+-Dépot Distant
+
+C'est quoi un remote?
+----------------------
+
+Un remote est tout simplement <<un pointeur>> vers un dépot qui va nous <<servir de réferences>>.
+
+c'est a dire que lorsque vous cloner un Depot en local git créer Automatiquement un remote appel Origin qui <<Indique>> le dépot qui sert d'origine  a notre depot local cloner.
+
+>> git remote -v // pour afficher la liste des remotes
+
+>> git remote show Remote_Name // pour afficher les informations complémentaire a ce remote
+
+Attention :  remote n'est qu'un pointeur vers un Dépot qui vous sert de reference, ce qui veut dire que vous pouvez en creer en fonction du context
+---------    
+			 Comprennez qu'un remonte pointe vers le derniers Commit effectuer sur un Dépot referent(Dépot distant).
+			 
+			 Si une fois que vous effectuer un clonne et que  le dernier commit(sur le server distant github) est C alors Remote Origin pointera sur ce Commit C en local après votre clone.
+
+->par defaut :
+
+>> git remote show Origin
+
+
+Pourquoi les remote ?
+---------------------
+Comme nous l'avons mentionner si deçut lorsque vous effectuez un clonne par defaut vous disposez d'un pointeur(Remote) vers le Déppot distant qui vous sert de référence.
+
+Ainsi daans le dossier contenant le Projet Clonne vous pouvez effectuer un <<push>> vers le depot Distant et un <<fetch>> afin de Synchroniser le travail et ceci grace au pointeur Remote.
+
+Supposons que nous disposons d'un <<Dépot local>> ce qui veut dire que par defaut nous ne disposons pas de pointeur remote, il faudrai donc en Ajoujer et ceci grâce a la commande git suivante :
+
+>> git remote add Remote_Name << URL vers le Dépot Distant >> // git remote add Origin https://github.com/addaissaabdoulrazak/Elasticsearch.Demo
+
+
+
+Pousser les modifications : 
+-------------------------
+
+>> git push -u Origin master  // poussez uniquement les Modifications apportées au niveau des Commits (Vos TAG ne seront pas poussez )
+
+Vos Custom TAG seront présent sur le Dépot local, mais n'y serons sur le Dépot Distant
+
+Ainsi donc pour poussez Vos Custom TAG il faudrais ajouter une Petite Variante a la commande git push
+
+>> git push Origin TAG_Name   // poussez les Tag un a un
+
+>> git push --tags // poussez tout les Tag << Cependant git utilisera le remonte Origin par défaut même si vous ne le mentionné  pas >> 
+
+
+
+Notion Supplementaire (stash):
+------------------------------
+
+Nous Pouvons appliquer cette Notion de Stash selon deux cas :
+
+1-Prémier Cas de Figure :
+  ---------------------- 
+	Nous disposons des Modification sur la branche Master et que nous vouliez switché vers une branche New_Brache cela ne peut être effectuer tant que nos modification sur la brance Master non pas été enregistrer(commitées)
+  
+    Et il se peut que nous ne voulions pas commitées nos changement, et nous vouliez juste verifier quelque chose sur la New_Branche, alors là nous pouvons effectuer un <<git stash>>
+	
+	
+	
+2-Second Cas de Figure :
+  ----------------------
+  
+Lorsque vous vouliez effectuer un <<git pull>> sachant que vous avez des modification en cours non indexé alors là vous pouvez effectuer un <<git stash>>.
+
+une fois la recuperation effectuer avec un <<git pull>> vous pouvez alors réInjecté votre Stash et automatiquement un merge sera effectué. 
+
+lorsque nous avons des modifications completement differente sur une même ligne entre le (Commit recuperer) et le (stash), alors dans ce cas precis vous serez obligé d'effectuer un Merge manuellement.
+
+
+
+
+	
+
+
+>> git stash  // git stash save "write message"  => cette commande permet de régrouper l'ensemble de vos modification de votre Space de travail Workspace en un packet,
+
+													qui sera accompagner du message que vous alliez ajouté a la commande.
+													
+													
+													
+													
+>> git stash pop index_du_Stash  // git stash pop 0   => permet de reInjecté le stash ayant le numero d'index mentionnée(les numero de stash sont attribut par ordre croissant)													
+
+
+
+>> git stash list   // Afficher la list des Stash
+
+>> git stash show Numero_Index // pour Voir le contenue de l'stash (Numero_Index). Ce qui veut dire que cette Commande doit toujours <<être précéder>> par la commande git stash list
+
+
+
+NB : l'ensemble des stash serons regroupé dans une liste(Un peut comme une Mémoire Cache) et chaque Stash sera indexé par un identifiant qui est important de savoir.
+--
+
+
+
+
+
+--------------------------------------------------[Gestions Des Branches]-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**Une fois que vous creer un nouvelle branche en local(WorkSpace) vous devriez la poussez au Niveau du dépot distant(Remote repository) et cela grâce a la commande suivante.
+
+>> git push --set-upstream origin New_Branche_Name  // afin de poussez la branche nouvellement creer en local(WorkSpace) vers le dépot distant(Remote repository).
+
+
+>> git branch -a // permet de voir l'emsemble des branche même celle qui sont uniquement sur le server Distant a travers cette commande
+
+
+
+
+
+--------------------------------------------------[Git merge Vs git rebase]----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Comment Combiner le contenue de deux branche (c'est commande ne nous offre pas la poosibilité de deplacer un commit parmi +sieurs, d'une branche vers une autre )
+
+il s'agit de deux façons differente qui permet de combiner le contenue de deux BRANCHE mais <<rebase>> reste plus optimal
+
+--Rebase : permet de copier le contenue de la branche courante(*) sur une branche referencer par rebase.
+
+git rebase non_Branche    permet de creer un séquence de commit lineaire les unes a la suite des autre et ceci dans le cadre d'une meilleurs Organisation de votre Historique
+
+
+**Le principe de rebase c'est de déplacer un commit vers un autre ce qui nous permettra d'avoir un Historique très comprehensible et bien Organiser grace a la commande << git pull --rebase >> 
+ 
+   ceci evitera de creer un Nouveau Commit afin de pouvoir effectuer un merge (A+B = C) appelé commit de Merge Afin d'avoir une historique bien plus claire.
+   
+    A la difference du merge cette Commande << git pull --rebase >> nous permet d'avoir une Historique qui n'est pas polluer par des commit qui ne sert simplement qu'a fusionner des modification.
+	
+	NB: Essayer d'observé votre Historique pour savoir de quoi il est question << git log --oneline --decorate --graph --all >>
+	--
+
+--Merge : pour ce qui est de la commende merge elle est associer a une branche Non Courante(!! Attention).
+
+supposons que nous avons une branche principe sur la quelle nous somme referencer (Main *) et une branche bugFix 
+
+git merge bugFix  : cette commande creéra un Nouveau commit sur lequel pointera Main et notre Nouveau commit aura deux parent
+
+
+
+--------------------------------------------------[Se déplacer dans Git]------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+emplacement actuel (HEAD) :
+
+-HEAD pointe toujours sur le commit le plus récent dans l'arbre des commits  La plupart des commandes Git qui modifient l'arbre des commits vont commencer par modifier HEAD.
+
+-Normalement HEAD pointe sur le nom d'une branche (comme bugFix). Quand vous effectuez un commit, le statut de bugFix est modifié et ce changement est visible par le biais de HEAD.
+
+
+
+
+-NB: il y'a une certain difference entre une <branche> et un <commit>  et Head ne concerne que les commit <<  Head ne pointe que sur un commit le plus recent par defaut dans l'arbre des commit >>
+
+     Ainsi Toute comamnde qui permet de  modifier l'arbre des commit(on parle de commit ici) commencera par Modifier Head.
+	 
+	 De base Head pointe sur le nom d'une branche par exemple bugFix, Quand vous effectuez un commit, le statut de bugFix est modifié et ce changement est visible par le biais de HEAD.
+	 
+	 voila ce qu'on a par defaut << HEAD -> main -> C1 >>
+	 
+	 c'est a dire si vous voulez voir les modification effectuer au niveau du commit C1 de la branche bugFix il fuat detacher Head de la branche Main et l'attacher a un commit
+
+	 git checkout C1 et on aura : << HEAD -> C1 >>
+
+
+
+Exemple : Commande : git checkout C1 (avec C1 pour commit)
+---------
+
+
+--pour specifier le nombre de commit ayant déja été effectuer(sachant qu'il existe  bien sûr une difference entre commit C et branche master,..) 
+
+git checkout Head~4   << pour ce qui est du deplacement de Head sur un Commit >>
+
+
+-->> Par contre pour ce qui est du deplacement d'une <<branche Main comme exemple>> par rapport a un commmit (C1) voulez devoir forcer cela.
+
+git brach -f main (Nom du Commit) == git branch -f main c1
+
+NB : observer bien la difference L'un utilise git branch(pour le deplacement d'une branche) et l'autre git checkout(pour le deplacement de Head)
+
+
+
+--------------------------------------------------[Annuler les Commit en Local et en Distance deux Contexte different]--------------------------------------------------------------------------------------------------------------
+
+1er Context En Local  (Annulation d'un commit sur mon local)
+--------------------
+
+git reset HEAD~1  << En majuscule pour ce qui est de l'annulation sinon ça ne marchera pas >>
+
+!!ATTENTION << HEAD doit être En majuscule  sinon ça ne marchera pas >>   Pour ce qui concerne les ANNULATION HEAD dout être en majuscule
+
+
+2e Contexte Remote(Distant)
+---------------------------
+
+git revert HEAD   << ce commende engendra la creation d'un nouvelle commit qui correspond a l'anulation de notre commit >>
+
+!!ATTENTION << HEAD doit être En majuscule  sinon ça ne marchera pas >>
+
+
+
+--------------------------------------------------[Deplacement de votre travail git]------------------------------------------------------------------------------------------------------------------------------------------------
+
+NB: Cette commande << git cherry-pick Commit_1 commit_2 >> est très important dans le contexte de développement en plusieurs.
+--
+
+Supponsons que le Developpeur 1 a effectuer un commit pour ce qui est de la resolution d'un BUG sur une branche B1 et Vous en tant que developpeurs 2 vous vouliez non pas tous sont code car cella peut être source de conflit
+
+Mais uniquement la partie qui resoud le BUG. cela n'est possible qu'avec la commande << git Cherry-pick  >> qui vous permetra de selection un Commit d'un Branche pour placer cela vers une autre branche
+
+
+
+
+Comme nous l'avons dit a chaque branche est associer un ou plusieurs commit.
+
+ici grace a la commange  : git cherry-pick Commit_1 commit_2   (d'une branche non selectionner vers  la branche actuellement selected)
+
+Nous aurons la possibilité de deplacer par exemeple 2 commit par 4 d'une branche side vers une branch Main(selected *)
+
+
+Tout comme nous pouvons procedez par  : git rebase -i (i pour interractif)
+
+
+
+
+
+--------------------------------------------------[GIT via Terminal et Interface graphique ]------------------------------------------------------------------------------------------------------------------------------------------------
+
+Il faudrai voir les Interface graphique comme étant <<des filtre>> qu'on vient appliquer par dessus de l'outils git, cela signifie que vous devriez impérativement avoir l'outil git Installé sur votre machine
+
+pour pouvoir utiliser les Interface graphique qui sont lié.
+
+L'intraface graphique c'est Pratique, simple, visuel. 
+
+le diff, l'idexation interactif, l'affichage de l'historique de notre dépot, c'est fonctionnalité sont plus claire et plus facile a utilisé via les Interface graphique
