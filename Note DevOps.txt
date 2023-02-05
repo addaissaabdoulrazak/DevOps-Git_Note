@@ -18,10 +18,31 @@ Introduction a Git
 NB: les trois premières Zones(Repectoires) sont des zones Local et sont independante de la Dernière Zone a savoir Dépot Distant(Remote repository hebergé sur un server)
 ---
 
+
+
+
+
+
+
 --------------------------------------------------[Quelque commande Basique a connaitre]------------------------------------------------------------------------------------------------------------------------------------------
 
 
 >> ls -la    => pour afficher les fichier et les dossier qui commence par un point(.) notamment les fichiers et dossier caché(.git par exemple)
+
+
+
+LIRE CECI IMPORTANT :
+---------------------
+Lorsque vous travaillez a plusieurs sur un même projets et que vous êtes censé faire un clone du depot Distant, assurez vous que chaque effectue la commande suivante après le clonnage
+
+>> git config user.name "saisissez votre nom" // Afin de savoir les modification apporté par chaque personne, c'est a dire de savoir de qui vient cette modification
+
+
+
+
+
+
+
 
 
 
@@ -440,4 +461,11 @@ pour pouvoir utiliser les Interface graphique qui sont lié.
 
 L'intraface graphique c'est Pratique, simple, visuel. 
 
-le diff, l'idexation interactif, l'affichage de l'historique de notre dépot, c'est fonctionnalité sont plus claire et plus facile a utilisé via les Interface graphique
+le diff, l'idexation interactif, l'affichage de l'historique de notre dépot, c'est fonctionnalité sont plus claire et plus facile a utilisé via les Interface graphique.
+
+
+Cependant l'Interface grapique ne permet pas tout : car l'utilisation de l'interface graphique c'est un peut comme appliquer un filtre sur l'outil et qui dit filtre dit Forcement Perte d'information  vous aurez alors 
+
+Moins de commande et moin d'option disponible pour l'utilisation de l'outils git, Et cela est tout a fait logique, car finalement une Interface est la pour Simplifier l'utilisation, et vous serez Obligé d'utiliser
+
+L'invite de commande pour certaine fonctionnalité, et donc l'utilisation des Interfaces graphique ne peuvent aps être l'unique solution
