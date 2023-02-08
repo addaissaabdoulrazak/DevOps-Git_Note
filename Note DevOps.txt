@@ -6,7 +6,7 @@ Introduction a Git
 
 2- Quatre repectoire sont mis en jeux (Dans un Ordre bien précis) 
   
-    .repectoire de travail(Working Directory)
+    .repectoire de travail(Working Directory ou WorkSpace)
 	
 	.Zone d'index(Staging Area)										
 	
@@ -18,7 +18,7 @@ Introduction a Git
 NB: les trois premières Zones(Repectoires) sont des zones Local et sont independante de la Dernière Zone a savoir Dépot Distant(Remote repository hebergé sur un server)
 ---
 
-
+<<<<<<<<<<<<<<<<<<<<<<<<<<< Chercher c'est quoi les Hooks avec git  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
@@ -336,6 +336,14 @@ NB : l'ensemble des stash serons regroupé dans une liste(Un peut comme une Mém
 >> git branch -a // permet de voir l'emsemble des branche même celle qui sont uniquement sur le server Distant a travers cette commande
 
 
+Important 
+----------
+
+**faut toujours Visualisé votre Historique et savoir la lire
+
+Sachez que la création d'une nouvelle branche se basera toujours sur la brache a partir de laquelle elle derive.
+
+Par exemple si la branche master comporte deux(2) commit A, B et que nous créons une nouvelle Branche New_Branche celle ci héritera également des deux(2) commit A,B par defaut.   
 
 
 
@@ -347,7 +355,13 @@ il s'agit de deux façons differente qui permet de combiner le contenue de deux 
 
 --Rebase : permet de copier le contenue de la branche courante(*) sur une branche referencer par rebase.
 
-git rebase non_Branche    permet de creer un séquence de commit lineaire les unes a la suite des autre et ceci dans le cadre d'une meilleurs Organisation de votre Historique
+>> git rebase non_Branche // permet de creer un séquence de commit lineaire les unes a la suite des autre et ceci dans le cadre d'une meilleurs Organisation de votre Historique
+
+>> puis suivant automatiquement de la commande >> git merge ..
+
+NB: la commande git rebase est accompagner de la commande git merge  ceci est d'ordre capital
+--
+
 
 
 **Le principe de rebase c'est de déplacer un commit vers un autre ce qui nous permettra d'avoir un Historique très comprehensible et bien Organiser grace a la commande << git pull --rebase >> 
@@ -363,7 +377,11 @@ git rebase non_Branche    permet de creer un séquence de commit lineaire les un
 
 supposons que nous avons une branche principe sur la quelle nous somme referencer (Main *) et une branche bugFix 
 
-git merge bugFix  : cette commande creéra un Nouveau commit sur lequel pointera Main et notre Nouveau commit aura deux parent
+>> git merge bugFix  // cette commande creéra un Nouveau commit sur lequel pointera Main et notre Nouveau commit aura deux parent.  Et ce nouveau commit est appel <<commit de merge>>
+
+
+Attention :  nous avons un autre type de merge appeler <<Fast-forward>>
+----------
 
 
 
@@ -411,7 +429,7 @@ NB : observer bien la difference L'un utilise git branch(pour le deplacement d'u
 
 --------------------------------------------------[Annuler les Commit en Local et en Distance deux Contexte different]--------------------------------------------------------------------------------------------------------------
 
-1er Context En Local  (Annulation d'un commit sur mon local)
+1er Context En Local  (Annulation d'un <<commit>> sur mon local)
 --------------------
 
 git reset HEAD~1  << En majuscule pour ce qui est de l'annulation sinon ça ne marchera pas >>
@@ -426,6 +444,30 @@ git revert HEAD   << ce commende engendra la creation d'un nouvelle commit qui c
 
 !!ATTENTION << HEAD doit être En majuscule  sinon ça ne marchera pas >>
 
+
+
+3e Contexte Zone d'index(Staging area)
+--------------------------------------
+
+>> git checkout File_Name //pour Supprimer les Modification dans votre workSpace (Attention : nous parlons de supprimer et non DéIndexé)
+
+Avec la version 2.24.0 ou plus(+) cette commande a été remplacer par 
+
+>> git restore File_Name  // Attention il ne s'agit pas de déIndexé mais d'ecraser les Modification (Faut savoir bien Differencé ce processus)
+
+
+Pour DéIndexé Vos fichier vus pouvez utilisez la commande suivante :
+---------------------------------------------------------------------
+
+>> git reset HEAD File_Name // DéIndexé les modifications
+
+>> git restore --staged File_Name // DéIndexé les modification (pour une version de git >= 2.24.0)
+
+>> puis faite << git restore File_Name >> // pour annuler les modification
+
+
+NB: on remarque que la commande git Restore peut avoir une double fonctionnalité  (DéIndexé et supprimer)
+--
 
 
 --------------------------------------------------[Deplacement de votre travail git]------------------------------------------------------------------------------------------------------------------------------------------------
