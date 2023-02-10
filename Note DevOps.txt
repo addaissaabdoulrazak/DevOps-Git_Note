@@ -461,6 +461,52 @@ git checkout Head~4   << pour ce qui est du deplacement de Head sur un Commit >>
 git brach -f main (Nom du Commit) == git branch -f main c1
 
 NB : observer bien la difference L'un utilise git branch(pour le deplacement d'une branche) et l'autre git checkout(pour le deplacement de Head)
+---
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------[La puissance de la commande Checkout-Une Commande effectuer +sieurs(3) Actions ]--------------------------------------------------------------------------------------------------------------
+
+>> git checkout est une commande très puissante qui effectue plusieurs actions.
+
+Par exemple :
+
+--**--La navigation dans l'historique a travers la commande
+
+>>git checkout SHA-One-ID
+
+>>git checkout ref(TAG)
+
+Afin de se deplacer sur un commit donné de mon s'historique.
+
+
+--**--L'annulation des modification en local dans notre WorkSpace(Working directory)
+
+**si nous modifions un fichier et au final on a envie d'annuler les modifications en cours  dans ce fichier là on peut faire :
+
+>> git checkout <file>
+
+
+--**--Changer de Branche Actif
+
+>>git checkout <branche> // ceci permettra de deplacer le pointeur Head sur la branche donné en paramètre
+
+
+NB :  	la commande <<checkout SHA-One-ID >> vous permet de revernir en arriver(dans le passé) ou de vous deplacer sur un commit, mais en aucun cas de sauvegarder les modification que vous feriez dans ce passé 
+*****
+		avec cette commande >> git checkout SHA-One-ID  //nous ne pouvez rien toucher, mais vous pouvez regarder les choses telqu'elle étaient avant.
+														//Et même si vous effectuer des modification il ne saurons pas Sauvegarder
+
+
+
+
 
 
 
