@@ -2,6 +2,8 @@
 Introduction a Git
 ------------------
 
+0- toute la magie du versionning opère au niveau du fichier invisible(.git)
+
 1- ce qu'il faut savoir c'est : A chaque branche est associer un ou plusieurs Commit
 
 2- Quatre repectoire sont mis en jeux (Dans un Ordre bien précis) 
@@ -29,7 +31,24 @@ NB: les trois premières Zones(Repectoires) sont des zones Local et sont indepen
 
 >> ls -la    => pour afficher les fichier et les dossier qui commence par un point(.) notamment les fichiers et dossier caché(.git par exemple)
 
+>> touch readme.md //create a new file
 
+>> mkdir  Directory_Name  //create a new directory
+
+>> rm readme.md //pour supprimer le fichier readme.md
+
+>>git add *.html //cette commande permet d'ajouter tout les fichier de type html a la Zone Staged areas
+
+>> git add --all // cette commande est une alternative de << git add -A / git add . >>
+
+
+>> git help --config //sur windows cela ouvrirera le navigateur et vous aurez des information sur la configuration(c'est a dire vous pouvez voir les differente option de la configuration)
+
+>> git help log // pour voir les option de la commande <<log>> 
+
+>> git config --list //pour voir tout ce qui a été definie au niveau de votre configuration
+
+>> git config --global color.ui true
 
 LIRE CECI IMPORTANT :
 ---------------------
@@ -40,6 +59,22 @@ Lorsque vous travaillez a plusieurs sur un même projets et que vous êtes cens�
 
 
 
+
+--------------------------------------------------[ Récommandation]------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+il est recommeandé de creer un fichier qui s'appel << gitignore >> qui permet de lister tout les fichiers que nous souhaitons ignorer dans notre projets.
+
+il est conseillé d'utiliser ce fichier étant données que le système d'exploitation rajoute malheuresement des fichiers particulier.
+
+De la même façons si vous travaillez avec des frameworks, ou des codes dinamique, vous aurez des fortes chance d'avoir un dossier qui contient des truc inévident.
+
+-**-Pour ignorer il vous suffit de creer un fichier << .gitignore >> voir commande
+
+>> touch .gitignore (Noté bien le point << . >>)
+
+-*-Vous pouvez igonrer tous les fichier tmp (*.tmp)
+
+-*-Vous pouvez également ignorer tout le contenue d'un dossier (temp/*)
 
 
 
@@ -55,7 +90,7 @@ Lorsque vous travaillez a plusieurs sur un même projets et que vous êtes cens�
 
 
 
-Attention : si WorkSpace ce que git add n'a pas encore été appliquer
+Attention : si WorkSpace, ce que <<git add>> n'a pas encore été appliquer
 ----------
 
 Cependans si nous ajoutons les modificatios à la Zone d'indexage(Staging Area) En utilisant la commande git add -A,  alors dans ce cas precis la commande git diff n'affichera Aucune modification
@@ -122,6 +157,8 @@ NB: Toutes les branche dans Git possède un TAG a son Nom (C'est a dire, si la b
 
 Commande
 ---------
+
+>> git commit -a -m "Commentaire" // cette commande vous permettra d'effectuer un Commit sans pour autant passer par la phase de Staged Areas (git add -A)
 
 >> git log   ==> pour afficher l'Historique  de notre Dépot git << c'est a dire tout les commit (la liste des Commits) >>
 
@@ -290,7 +327,7 @@ Nous Pouvons appliquer cette Notion de Stash selon deux cas :
 2-Second Cas de Figure :
   ----------------------
   
-Lorsque vous vouliez effectuer un <<git pull>> sachant que vous avez des modification en cours non indexé alors là vous pouvez effectuer un <<git stash>>.
+Lorsque vous vouliez effectuer un <<git pull>> sachant que vous avez des modification en cours non indexé alors là, vous pouvez effectuer un <<git stash>>.
 
 une fois la recuperation effectuer avec un <<git pull>> vous pouvez alors réInjecté votre Stash et automatiquement un merge sera effectué. 
 
@@ -302,7 +339,7 @@ lorsque nous avons des modifications completement differente sur une même ligne
 	
 
 
->> git stash  // git stash save "write message"  => cette commande permet de régrouper l'ensemble de vos modification de votre Space de travail Workspace en un packet,
+>> git stash  // git stash save "write message"  => cette commande permet de régrouper l'ensemble de vos modification de votre Space de travail (Workspace) en un packet,
 
 													qui sera accompagner du message que vous alliez ajouté a la commande.
 													
