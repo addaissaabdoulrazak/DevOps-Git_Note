@@ -311,8 +311,8 @@ Ainsi donc pour poussez Vos Custom TAG il faudrais ajouter une Petite Variante a
 
 
 
-Notion Supplementaire (stash):
-------------------------------
+Notion Supplementaire (stash/remisage):
+---------------------------------------
 
 Nous Pouvons appliquer cette Notion de Stash selon deux cas :
 
@@ -398,6 +398,12 @@ il s'agit de deux façons differente qui permet de combiner le contenue de deux 
 
 NB: la commande git rebase est accompagner de la commande git merge  ceci est d'ordre capital
 --
+
+
+--Rebase interractif << possibilité de fusionné tous les commit d'une branche enfin d'en faire un seul commit avant de l'associer a la branche master, ou-bien de Intervertir la position des commits dans l'Historique >>
+
+
+
 
 
 
@@ -510,7 +516,42 @@ NB :  	la commande <<checkout SHA-One-ID >> vous permet de revernir en arriver(d
 
 
 
+
+
+
+--------------------------------------------------[Git Revenir en Arrière]--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+>> git checkout SHA-One-ID //vous permet de voir le commit t'elle qu'il étais avant, sans perdre les modification qu'on a faite depuis. En revanche on peut que Observer, on ne pourra pas effectuer des modification dessus
+
+
+>> git checkout SHA-One-ID <File> //cette commande ramenera le fichier t'elle qu'il étais au moment du commit(SHA-One-ID), Et nous pourrons par la suite le stage et commit
+
+
+>> git revert SHA-One-ID //permet de defaire un commit(SHA-One-ID indiquer en paramètre)  tout en garder l'historique comme elle est.
+
+
+>> git revert SHA-One-ID <file> //permet de defaire les modification qui ont été apporté a ce fichier et ceci n'altère pas l'historique 
+
+
+>> git reset SHA-One-ID //permet de revenir en Arrière sur un commit precis(SHA-One-ID indiquer en paramètre). cette Commande Gardera notre Dossier de Travail(WorkSpace) comme il est Actuel, mais en mode Unstaged   
+						//Donc on ne perdra pas les modification que nous avons faites depuis , mais c'est L'historique qui sera altérer. <<d'ou vous êtes entrain de réecrire l'historique >>
+
+
+
+>>git reset SHA-One-ID --hard //nous allons revernir en arrière, et en plus notre espace de travail(WorkSpace)  et donc nos fichier vont être modifier pour être identique a notre commit (SHA-One-ID indiquer en paramètre)
+							  //cela révidra a l'état zéro zéro comme lors du commit. 
+							  
+							  
+							  
+
+NB :    -faite attention avec la commande reset vu qu'elle va altérer L'historiques
+----
+		-revert ne permet pas de revernir au commit(SHA-One-ID indiquer en paramètre) mais de le défaire
+
+
 --------------------------------------------------[Annuler les Commit en Local et en Distance deux Contexte different]--------------------------------------------------------------------------------------------------------------
+
+
 
 1er Context En Local  (Annulation d'un <<commit>> sur mon local)
 --------------------
