@@ -329,7 +329,9 @@ Un point important du git clone a connaitre
 Pousser les modifications : 
 -------------------------
 
->> git push -u Origin master  // poussez uniquement les Modifications apportées au niveau des Commits (Vos TAG ne seront pas poussez )
+>> git push -u Origin master  // poussez uniquement les Modifications apportées au niveau des Commits (Vos TAG ne seront pas poussez ) 
+
+>> git push -u origin <branch> // permet également de pouser une branche vers le depot distant (u = upstream)
 
 Vos Custom TAG seront présent sur le Dépot local, mais n'y serons sur le Dépot Distant
 
@@ -633,7 +635,7 @@ NB : toutes modification indexé sera appeler potos
 2-Sachant qu'il existe plusieurs mode, le mode definie les opération a effectuer sur [Index-ZOne] et la Copie de travail [WorkSpace]
 
 
->> git reset --<mode> <revision> // => deplace HEAD a emplacement voulu.
+>> git reset --<mode> <revision/SHA-One-ID> // => deplace HEAD a emplacement voulu.
 
 .Mode soft
 
