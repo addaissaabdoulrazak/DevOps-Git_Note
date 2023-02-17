@@ -635,7 +635,7 @@ NB : toutes modification indexé sera appeler potos
 2-Sachant qu'il existe plusieurs mode, le mode definie les opération a effectuer sur [Index-ZOne] et la Copie de travail [WorkSpace]
 
 
->> git reset --<mode> <revision/SHA-One-ID> // => deplace HEAD a emplacement voulu.
+>> git reset --<mode> <HEAD~Numerber> // => deplace HEAD a emplacement voulu. NB: il ne faut surtout pas utiliser le SHA-One-ID a ce niveau car cela ne marchera pas.
 
 .Mode soft
 
