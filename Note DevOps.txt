@@ -437,6 +437,7 @@ Avec le << git stash apply >> vous verifiez qu'il n'y pas de problème, vous cer
 
 >> git branch -d <branch> // pour supprimer une branch en local
 
+*****************************************************************************************************
 >> git push origin --delete <branch> // pour supprimer une branch en distance
 
 
@@ -616,14 +617,20 @@ NB :  	la commande <<checkout SHA-One-ID >> vous permet de revernir en arriver(d
 
 NB :    -faite attention avec la commande reset vu qu'elle va altérer L'historiques
 ----
-		-revert ne permet pas de revernir au commit(SHA-One-ID indiquer en paramètre) mais de le défaire
+		-revert ne permet pas de revernir au commit(SHA-One-ID indiquer en paramètre) mais de le défaire ce qui va engendré la creation d'un autre commit
+
+     		(le commit defait sera toujours present dans l'istorique mais vous ne le verrez pas, faut juste le savoir et le gardez a l'esprit )
+		
+		  Et donc si vous vouliez revenir a votre commit defait il faut encore defaire le nouveau commit qui a defait votre commit (easy (;p )
 		
 		
 		
 		II) Concepte Fondamentale : La puissance de Reset (Rien ne se pert tout se transforme -ou presque)
 		----------------------------------------------------------------------------------------------------
-		
-NB : toutes modification indexé sera appeler potos
+
+NB 1 : HEAD~1 veut tout simplement dire reculer d'un(1) pas par rapport au dernier commit
+----		
+NB 2 : toutes modification indexé sera appeler potos
 --
 
 1-Après avoir ajouter des fichiers modifier pour <<annuler>> la potos.
@@ -672,14 +679,14 @@ C'est trois Mode fond prèsque la même chose	( a suivre).
 
 --------------------------------------------------[Annuler les Commit en Local et en Distance deux Contexte different]--------------------------------------------------------------------------------------------------------------
 
-
+NB : HEAD~1 veut tout simplement dire reculer d'un(1) pas par rapport au dernier commit
 
 1er Context En Local  (Annulation d'un <<commit>> sur mon local)
 --------------------
 
 git reset HEAD~1  << En majuscule pour ce qui est de l'annulation sinon ça ne marchera pas >>
 
-!!ATTENTION << HEAD doit être En majuscule  sinon ça ne marchera pas >>   Pour ce qui concerne les ANNULATION HEAD dout être en majuscule
+!!ATTENTION << HEAD doit être En majuscule  sinon ça ne marchera pas >>   Pour ce qui concerne les ANNULATION HEAD doit être en majuscule
 
 
 2e Contexte Remote(Distant)
