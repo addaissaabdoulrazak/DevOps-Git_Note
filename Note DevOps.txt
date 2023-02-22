@@ -1,4 +1,16 @@
 
+Règle
+-----
+
+Ne poussé votre Historique qui se trouve en local vers le repo distant qu'après avoir être a 100% sûr que :
+
+-que le nom du commit(commentaire) est bien ce que vous vouliez et qu'il n'y aura pas de verification dans le futur.
+
+-que votre historique est bien ce a quoi vous vous attendez.
+ 
+
+
+
 Introduction a Git
 ------------------
 
