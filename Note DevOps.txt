@@ -393,7 +393,7 @@ vous pouvez également creer de branche en function de ce qui est stashé
 
 >> git stash branc <branche>
 
->> git stash -u //pour mettre en stash les fichier qui ne sont traqué (Untracked file)
+>> git stash -u //pour mettre en stash les fichier ou Dossier qui ne sont pas traqué (Untracked file)
 
 
 
@@ -743,7 +743,9 @@ Supponsons que le Developpeur 1 a effectuer un commit pour ce qui est de la reso
 
 Mais uniquement la partie qui resoud le BUG. cela n'est possible qu'avec la commande << git Cherry-pick  >> qui vous permetra de selection un Commit d'un Branche pour placer cela vers une autre branche
 
+Par exemple si le commit qui vous interesse est situé sur la <<branche feature>>, effectuer un (checkout) pour switché vers la branch et selectionné le commit grace a son SAH-One-ID, puis reSwitché pour revenir
 
+sur la brache a la quelle vous souhaitez appliquer le commit et faite un cherry-pick.
 
 
 Comme nous l'avons dit a chaque branche est associer un ou plusieurs commit.
