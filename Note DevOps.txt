@@ -7,8 +7,10 @@ Ne poussé votre Historique qui se trouve en local vers le repo distant qu'aprè
 -que le nom du commit(commentaire) est bien ce que vous vouliez et qu'il n'y aura pas de verification dans le futur.
 
 -que votre historique est bien ce a quoi vous vous attendez.
- 
 
+-tous ce qui n'a pas été commité est un travail en cours ( travail en cours =   << dans la copie de travail >> ou << dans Index  >> ) 
+ 
+-tout travail commit est ajouté a votre Historique contrairement à un travail en cours. 
 
 
 Introduction a Git
@@ -29,8 +31,14 @@ Introduction a Git
 	.Dépot Distant(Remote Repository)
 
 
-NB: les trois premières Zones(Repectoires) sont des zones Local et sont independante de la Dernière Zone a savoir Dépot Distant(Remote repository hebergé sur un server)
+NB: les trois premières Zones(Repectoires) sont des zones Local et sont independante de la Dernière Zone a savoir Dépot Distant(Remote repository hebergé sur un server).
 ---
+
+
+Donc en un mot : Modification 1 ----> photos 1 ----> commit 1
+				      |					|				|
+				copie de travail ----> Index ----> Dépot local(Associer a une Db local pour stocker nos information)
+				
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<< Chercher c'est quoi les Hooks avec git  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -46,6 +54,8 @@ NB: les trois premières Zones(Repectoires) sont des zones Local et sont indepen
 >> touch readme.md //create a new file
 
 >> mkdir  Directory_Name  //create a new directory
+
+>> md Directory_Name // raccourci for also create a new Directory
 
 >> rm readme.md //pour supprimer le fichier readme.md
 
@@ -516,7 +526,7 @@ emplacement actuel (HEAD) ou-bien notre emplacement a tout instant:
 
 -Normalement HEAD pointe sur le nom d'une branche (comme bugFix). Quand vous effectuez un commit, le statut de bugFix est modifié et ce changement est visible par le biais de HEAD.
 
--Scez que vous n'irez pas loin sans votre tête HEAD(mnemo)
+-Sachez que vous n'irez pas loin sans votre tête HEAD(mnemo).
 
 
 -NB: il y'a une certain difference entre une <branche> et un <commit>  et Head ne concerne que les commit <<  Head ne pointe que sur un commit le plus recent par defaut dans l'arbre des commit >>
@@ -639,17 +649,32 @@ NB :    -faite attention avec la commande reset vu qu'elle va altérer L'histori
 		
 		II) Concepte Fondamentale : La puissance de Reset (Rien ne se pert tout se transforme -ou presque)
 		----------------------------------------------------------------------------------------------------
+Reset me permet de :
+
+-Corriger/Completer mon derner commit
+
+-Defaire les X dderniers commits :
+   *Pour les supprimer
+   *pour les regrouper
+		
+-----------
+Convention 
+-----------
 
 NB 1 : HEAD~1 veut tout simplement dire reculer d'un(1) pas par rapport au dernier commit
 ----		
-NB 2 : toutes modification indexé sera appeler potos
---
+NB 2 : toutes modification indexé sera appeler potos(snapshot)
+-----
 
-1-Après avoir ajouter des fichiers modifier pour <<annuler>> la potos.
+1-Après avoir ajouter des fichiers modifier dans la zone d'index(photos),  pour <<annuler>> la potos(snapshot).
 
->>git reset <le-ou-les-fichier-ou-chemins>
+>>git reset <le-ou-les-fichier-ou-chemins> // pour déIndexé un fichier => git Unstage
+
+Attention: c'est le seul cas d'utilisation sur fichier (c'est a dire qui utilise le nom_du_fichier) car les autre cas d'utilisation utiliserons un mode(git reset --<mode>)
+##########
 
 
+------[Deplacement du Head et emploi du <Mode> avec git reset]---------
 
 2-Sachant qu'il existe plusieurs mode, le mode definie les opération a effectuer sur [Index-ZOne] et la Copie de travail [WorkSpace]
 
@@ -665,9 +690,34 @@ NB 2 : toutes modification indexé sera appeler potos
 A) Le Mode Soft (Ce mode est le plus light de tous)
 ----------------------------------------------------
 
-Ce mode ne fait que deplacer le pointeur Head il ne va pas toucher a l'index ni a la copie de travail.
+Ce mode ne fait que deplacer le pointeur Head il ne va pas toucher a l'index(photos-snapshot) ni a la copie de travail().
 
-Comprenez Bien ce processus car le mode Soft va juste defaire les commit Mais tous en gardant leurs Index et modification(Copie de travail) Intacte des commit defait
+Comprenez Bien ce processus car le mode Soft va juste defaire les commit Mais tous en gardant leurs Index et modification(Copie de travail) <<Intacte des commit defait>>
+
+-dès que le Head est deplacer du d'une commit initiale vers un Autre, nous pouvons dire que ce commit initiale à été défait car il sera plus visible dans l'historique, 
+
+ cependant gardez a l'esprit qu'il est toujours présent et que vous pouvez toutefois y revenir dessus 
+
+.vous pouvez toutefois utiliser ce mode pour modifier votre commit.
+
+.ou bien << j'aurai dû faire une branche plus tôt >> par exemple je m'apperçoit que mes deux derniers commit devraient être sur une branche dediée 
+
+
+-- commencer par creer une nouvelle branche à l'emplacement Acttuelle de votre Head
+
+>>git branch feature
+
+-- Puis vous ramenez la branch master sur une position voulue  grace à la commande ci dessous, Ainsi toutes les modif dans la copie de travail et la zone Index seront préservées grâce à ce mode #soft
+
+>>git reset --soft Head~n°i
+
+-- puis vous revenez sur la brach feature grâce à un checkout
+
+>> git checkout feature
+
+# une fois sur la branche vous pouvez alors continuer/finalier vos modif ou votre travail et continuer le travail sur la branch faeture
+
+
 
 
 B) Le Mode Mixed
@@ -681,12 +731,41 @@ Donc en grosso-modo soft et mixe font la même chose, ils permettent de preserve
 		
 
 C)Mode Keep, Merge, Hard
-----------------------------
+------------------------
 
 C'est trois Mode fond prèsque la même chose	( a suivre).
+
+si appliquer l'un de ces mode sur un travail en cours << vous perdez tout >>
+
+-#NB: un travail en cours est un travail qui n'a pas encore été commité
+    
+	   Aucun de ces mode ne permet de concerver l'index(photos-snapshot), Mais certains peuvent toutfois concerver le Workspace(copie du travail)
+
+ c.1 Mode Hard
+ --------------
+ 
+>> git reset --hard // defait tout même si le travail a été << Commiter >> Faire donc Attention a ce mode.
+ 
+ Supposons que vous avez commiter un travail A et que le Head point sur ce commit, puis vous avez entammer des nouvelle modification(travail en cour << soit dans la copie de travail soit dans dans Index  ).
+
+  -si vous voulez modifier uniquement le travail en cours sans impacter le Travail/Travaux commiter a partir duquel Head pointe(votre Historique sera concerver), tiliser cette commande :
+  
+  -tout travail commit est ajouter a votre Historique contrairement a un travail en cours 
+
+>> git reset --hard Head  // ici le mot clé Head est primondiale <<sinon>> vous risquez de tout écraser même vos travaux Commité  
+
+
+ c.2 Mode Keep
+ --------------
+ce mode permet de defaire les commit (vos commit serons supprimer de l'historique) mais tout-en Gardant les modif en Cours(ne touche pas vos modif Actuelle)
+
+>> git reset --keep sha-one/Head (test to see)
 		
-		
-		
+--------------------------------------------------[Git refog + git reset (Ctrl-Y)]--------------------------------------------------------------------------------------------------------------		
+
+Le reflog liste tous les emplacements parcourus par Head et les étiquettes de braches
+
+
 
 
 --------------------------------------------------[Annuler les Commit en Local et en Distance deux Contexte different]--------------------------------------------------------------------------------------------------------------
