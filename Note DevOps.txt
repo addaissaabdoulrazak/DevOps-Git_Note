@@ -59,10 +59,13 @@ Donc en un mot : Modification 1 ----> photos 1 ----> commit 1
 
 >> rm readme.md //pour supprimer le fichier readme.md
 
->>git add *.html //cette commande permet d'ajouter tout les fichier de type html a la Zone Staged areas
+>> git add *.html //cette commande permet d'ajouter tout les fichier de type html a la Zone Staged areas
 
 >> git add --all // cette commande est une alternative de << git add -A / git add . >>
 
+>> Control + shift + C :  ouvrir la console Cmd 
+
+>> code .(dot)  // pour ouvrir Vscode a partir de l'invite de commande Cmd
 
 >> git help --config //sur windows cela ouvrirera le navigateur et vous aurez des information sur la configuration(c'est a dire vous pouvez voir les differente option de la configuration)
 
