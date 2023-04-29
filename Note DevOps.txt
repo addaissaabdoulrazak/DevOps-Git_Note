@@ -697,16 +697,16 @@ Ce mode ne fait que deplacer le pointeur Head il ne va pas toucher a l'index(pho
 
 Comprenez Bien ce processus car le mode Soft va juste defaire les commit Mais tous en gardant leurs Index et modification(Copie de travail) <<Intacte des commit defait>>
 
--dès que le Head est deplacer du d'une commit initiale vers un Autre, nous pouvons dire que ce commit initiale à été défait car il sera plus visible dans l'historique, 
+-dès que le Head est deplacer  d'un commit initiale vers un Autre, nous pouvons dire que ce commit initiale à été défait car il sera plus visible dans l'historique, 
 
  cependant gardez a l'esprit qu'il est toujours présent et que vous pouvez toutefois y revenir dessus 
 
-.vous pouvez toutefois utiliser ce mode pour modifier votre commit.
+.vous pouvez toutefois utiliser ce mode pour modifier votre commit.(et si vous ne voulez pas avoir d'impact sur les modifications courantes, vous pouvez les Stash puis modification le commit)
 
-.ou bien << j'aurai dû faire une branche plus tôt >> par exemple je m'apperçoit que mes deux derniers commit devraient être sur une branche dediée 
+.ou bien << j'aurai dû faire une branche plus tôt >> par exemple je m'apperçoit que mes deux derniers commit devraient être sur une branche dediée ce qui faut c'est :
 
 
--- commencer par creer une nouvelle branche à l'emplacement Acttuelle de votre Head
+-- commencer par creer une nouvelle branche à l'emplacement Actuelle de votre Head
 
 >>git branch feature
 
@@ -847,7 +847,7 @@ Tout comme nous pouvons procedez par  : git rebase -i SHA-One-ID (i pour interra
 
 Il faudrai voir les Interface graphique comme étant <<des filtre>> qu'on vient appliquer par dessus de l'outils git, cela signifie que vous devriez impérativement avoir l'outil git Installé sur votre machine
 
-pour pouvoir utiliser les Interface graphique qui sont lié.
+pour pouvoir utiliser les Interfaces graphique qui sont lié.
 
 L'intraface graphique c'est Pratique, simple, visuel. 
 
