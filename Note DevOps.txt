@@ -38,6 +38,8 @@ NB: les trois premières Zones(Repectoires) sont des zones Local et sont indepen
 Donc en un mot : Modification 1 ----> photos 1 ----> commit 1
 				      |					|				|
 				copie de travail ----> Index ----> Dépot local(Associer a une Db local pour stocker nos information)
+			
+D'ou les étapes de creation d'un processus a travers les trois zones principales
 				
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<< Chercher c'est quoi les Hooks avec git  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
